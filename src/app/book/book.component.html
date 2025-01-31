@@ -1,0 +1,85 @@
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark" *ngIf="books()?.length">
+        <tr>
+            <td colspan="4" style="border: none; text-align:right;"><button (click)="onSelected(0, 'save')">Add
+                    Book</button></td>
+        </tr>
+        <tr>
+            <th scope="col">Book Title</th>
+            <th scope="col">Year</th>
+            <th scope="col">Auther Name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let _book of books(); index as i">
+            <td scope="row">{{_book.title}}</td>
+            <td>{{_book.year}}</td>
+            <td>{{_book.name}}</td>
+            <td><button (click)="onSelected(_book.id, 'save')">Edit</button> | <button
+                    (click)="onSelected(_book.id, 'delete')">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+    {{errorMessage }}
+</div>
+
+<div class="modal" [class]="showModal ? 'show':''" role="dialog" tabindex="-1" aria-modal="true">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left" [class]="action == 'delete' ? 'text-danger' : ''">{{action == 'save' ?
+                    'Save Book' : 'Delete Book?'}} - {{selectedbook()?.title}}</h4><button (click)="closePopup()"
+                    class="close pull-right" type="button"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-section" *ngIf="action == 'delete'">
+                    <div style="width:100%; text-align: center;">
+                        <button class="text-success" style="padding: 0.2rem 2rem;" (click)="closePopup()">No</button>
+                        <button class="text-danger" style="padding: 0.2rem 2rem; margin-left:1rem;"
+                            (click)="deleteProcess()">Delete</button>
+                    </div>
+                </div>
+                <div class="save-section" *ngIf="action != 'delete'">
+                    <div style="width:100%; text-align: left;">
+                        <div style="margin-bottom: 1rem">
+                            <div class="form-group">
+                                <label for="booktitle" class="form-label">Book Title:<sup
+                                        class="text-danger">*</sup></label><br>
+                                <input class="form-control" required="required" type="text" [(ngModel)]="newBook.title"
+                                    id="booktitle" name="booktitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="year" class="form-label">Year:<sup class="text-danger">*</sup></label><br>
+                                <input class="form-control" required="required" type="text" [(ngModel)]="newBook.year"
+                                    id="year" name="year">
+                            </div>
+                            <div class="form-group">
+                                <label for="name1" class="form-label">Auther Name:<sup
+                                        class="text-danger">*</sup></label><br>
+                                <input class="form-control" required="required" type="text" [(ngModel)]="newBook.name"
+                                    id="name1" name="name1">
+                            </div>
+                            <div class="form-group">
+                                <label for="year" class="form-label">Choose your List:</label><br>
+                                <select class="form-control" [(ngModel)]="newBook.list_id">
+                                    <option value="0">Please choose a List</option>
+                                    <option *ngFor="let item of listItems" value="{{item.id}}">{{item.title}}</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <button style="padding: 0.2rem 2rem;" (click)="closePopup()">Cancel</button>
+                        <button class="text-success" style="padding: 0.2rem 2rem; margin-left:1rem;"
+                            (click)="editProcess()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" [class]="showModal ? 'show':''"></div>
