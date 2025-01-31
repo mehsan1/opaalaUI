@@ -1,0 +1,16 @@
+$font-color: #333;
+$primary-color: #1976d2;
+$secondary-color: #96a5b5;
+
+$table-header : #ccc;
+$table-header-color: #000;
+$table-border-collapse: collapse;
+$table-display: table;
+$table-border-spacing: 2px;
+
+@mixin table-header {
+    display: table-header-group;
+    vertical-align: middle;
+    unicode-bidi: isolate;
+    border-color: inherit;
+}

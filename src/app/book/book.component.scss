@@ -1,0 +1,18 @@
+@use '../../assets/styles/variables' as *;
+
+.table {
+    width: 100%;
+    border-collapse: $table-border-collapse;
+    display: $table-display;
+    border-spacing: $table-border-spacing;
+}
+
+.table thead {
+    @include table-header; 
+}
+
+.table th,td {
+    border : #ccc solid 1px;
+    padding: .5rem;
+    text-align: left;
+}
