@@ -1,8 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Inject, Injectable, Signal, signal } from '@angular/core';
-import { Observable, catchError, map, retry, shareReplay, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable, signal } from '@angular/core';
+import { Observable, catchError, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { BooksResponse, Books } from '../interfaces/Books';
+import { BooksResponse } from '../interfaces/Books';
 import { Lists, ListsResponse } from '../interfaces/Lists';
 
 @Injectable({ providedIn: 'root' })
@@ -34,7 +34,7 @@ export class ListsService {
             .pipe(
                 retry(1),
                 catchError(this.handleError)
-            ).subscribe((booksResp) => {
+            ).subscribe(() => {
                 this.listsSignal.update((items: any) => items.filter((item: any) => item.id !== id));
             })
     }
@@ -45,9 +45,8 @@ export class ListsService {
             .pipe(
                 retry(1),
                 catchError(this.handleError)
-            ).subscribe((booksResp) => {
+            ).subscribe(() => {
                 this.getLists();
-                // this.booksSignal.update((items: any) => items.push(booksResp.results));
             })
     }
 
@@ -57,9 +56,8 @@ export class ListsService {
             .pipe(
                 retry(1),
                 catchError(this.handleError)
-            ).subscribe((booksResp) => {
+            ).subscribe(() => {
                 this.getLists();
-                // this.booksSignal.update((items: any) => items.push(booksResp.results));
             })
     }
 

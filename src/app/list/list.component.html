@@ -12,7 +12,7 @@
     <tbody>
         {{_list | json}}
         <tr *ngFor="let _item of _list(); index as i">
-            <td scope="row">{{_item.title}}</td>
+            <td>{{_item.title}}</td>
             <td><button (click)="onSelected(_item.id, 'save')">Edit</button> | <button
                     (click)="onSelected(_item.id, 'delete')">Delete</button> | <button
                     (click)="onSelected(_item.id, 'viewbooks')">View Books</button></td>
@@ -28,19 +28,19 @@
     <div role="document" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title pull-left" [class]="action == 'delete' ? 'text-danger' : ''">{{action == 'save' ?
-                    'Save List' : action == 'delete' ? 'Delete List?' : 'Add / Remove Books from List'}} - {{selectedlist()?.title}}</h4><button (click)="closePopup()"
+                <h4 class="modal-title pull-left" [class]="action === 'delete' ? 'text-danger' : ''">{{action === 'save' ?
+                    'Save List' : action === 'delete' ? 'Delete List?' : 'Add / Remove Books from List'}} - {{selectedlist()?.title}}</h4><button (click)="closePopup()"
                     class="close pull-right" type="button"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-                <div class="delete-section" *ngIf="action == 'delete'">
+                <div class="delete-section" *ngIf="action === 'delete'">
                     <div style="width:100%; text-align: center;">
                         <button class="text-success" style="padding: 0.2rem 2rem;" (click)="closePopup()">No</button>
                         <button class="text-danger" style="padding: 0.2rem 2rem; margin-left:1rem;"
                             (click)="deleteProcess()">Delete</button>
                     </div>
                 </div>
-                <div class="save-section" *ngIf="action == 'save'">
+                <div class="save-section" *ngIf="action === 'save'">
                     <div style="width:100%; text-align: left;">
                         <div style="margin-bottom: 1rem">
                             <div class="form-group">
@@ -57,7 +57,7 @@
                             (click)="editProcess()">Save</button>
                     </div>
                 </div>
-                <div class="books-list" *ngIf="action == 'viewbooks'">
+                <div class="books-list" *ngIf="action === 'viewbooks'">
                     <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr>
@@ -73,7 +73,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let _book of getAssignedBooks(); index as i">
-                                <td scope="row">{{_book.title}}</td>
+                                <td>{{_book.title}}</td>
                                 <td>{{_book.year}}</td>
                                 <td>{{_book.name}}</td>
                                 <td><button (click)="processAssociation(_book.id, 'unassign')">Un-Assign</button></td>
@@ -83,7 +83,7 @@
                                 </td>
                             </tr>
                             <tr *ngFor="let _book of getUnAssignedBooks(); index as i">
-                                <td scope="row">{{_book.title}}</td>
+                                <td>{{_book.title}}</td>
                                 <td>{{_book.year}}</td>
                                 <td>{{_book.name}}</td>
                                 <td><button (click)="processAssociation(_book.id, 'assign')">Assign</button></td>
