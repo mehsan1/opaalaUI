@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { RouterModule, provideRouter } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { BooksService } from './services/books.service';

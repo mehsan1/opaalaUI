@@ -14,7 +14,7 @@
     <tbody>
 
         <tr *ngFor="let _book of books(); index as i">
-            <td scope="row">{{_book.title}}</td>
+            <td>{{_book.title}}</td>
             <td>{{_book.year}}</td>
             <td>{{_book.name}}</td>
             <td><button (click)="onSelected(_book.id, 'save')">Edit</button> | <button
@@ -31,19 +31,19 @@
     <div role="document" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title pull-left" [class]="action == 'delete' ? 'text-danger' : ''">{{action == 'save' ?
+                <h4 class="modal-title pull-left" [class]="action === 'delete' ? 'text-danger' : ''">{{action === 'save' ?
                     'Save Book' : 'Delete Book?'}} - {{selectedbook()?.title}}</h4><button (click)="closePopup()"
                     class="close pull-right" type="button"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-                <div class="delete-section" *ngIf="action == 'delete'">
+                <div class="delete-section" *ngIf="action === 'delete'">
                     <div style="width:100%; text-align: center;">
                         <button class="text-success" style="padding: 0.2rem 2rem;" (click)="closePopup()">No</button>
                         <button class="text-danger" style="padding: 0.2rem 2rem; margin-left:1rem;"
                             (click)="deleteProcess()">Delete</button>
                     </div>
                 </div>
-                <div class="save-section" *ngIf="action != 'delete'">
+                <div class="save-section" *ngIf="action !== 'delete'">
                     <div style="width:100%; text-align: left;">
                         <div style="margin-bottom: 1rem">
                             <div class="form-group">
